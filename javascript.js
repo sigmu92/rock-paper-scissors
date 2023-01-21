@@ -36,18 +36,26 @@ let losses = 0;
 
 function updateScreen(result = "") {
     const resultLabel = document.querySelector('.game-output');
-    const playerScore = document.querySelector('.player-score');
-    const compScore = document.querySelector('.comp-score')
+    const playerScore = document.querySelector('#player');
+    const compScore = document.querySelector('#computer');
+    const tieScore = document.querySelector('#tie');
 
     resultLabel.textContent = result;
+    playerScore.textContent = wins;
+    compScore.textContent = losses;
+    tieScore.textContent = ties;
 }
 
 function playRound(e) {
-    
+
     const outputLabel = document.querySelector('.game-output');
     let result = getResult(e.target.textContent,getComputerChoice())
-    console.log(result)
     let resultLabel = "";
+
+    if ((losses >= 5) || (wins >= 5)) {
+        updateScreen("Press n to start a new game!");
+        return
+    }
     
     if (result == 0){
         ties += 1;
@@ -62,8 +70,26 @@ function playRound(e) {
 
     updateScreen(resultLabel);
 
+    if (losses == 5){
+        updateScreen("Computer has won the game!")
+    }
+    if (wins == 5){
+        updateScreen("You have won the game!")
+    }
 }
 
+function newGame(){
+    wins = 0;
+    ties = 0;
+    losses = 0;
+    updateScreen("Press a button to play!")
+}
+
+window.addEventListener('keydown', function(e){
+    if (e.keyCode == 78){
+        newGame();
+    }
+})
 
 const buttons = document.querySelectorAll('.input-button');
 buttons.forEach(button => button.addEventListener('click', playRound));
