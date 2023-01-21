@@ -1,0 +1,48 @@
+:root {
+   --main-color: #04d9ff;  
+}
+
+body {
+    background-color: black;
+    color: var(--main-color);
+    
+}
+
+.container {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20vh;
+}
+
+.game-output {
+    font-size: 50px;
+    font-weight: 900;
+    color: var(--main-color); 
+}
+
+.button-holder {
+    display: flex;
+    gap: 20px;
+}
+
+.input-button {
+    font-size: 20px;
+    font-weight: 900;
+    color: var(--main-color); 
+    border-color: var(--main-color);
+    background-color: black;
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 5px;
+    height: 100px;
+    width: 150px;
+}
+
+.input-button:hover {
+    color: var(--main-color);
+    box-shadow: 0 0 10px var(--main-color);
+}
