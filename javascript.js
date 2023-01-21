@@ -5,7 +5,7 @@ function getComputerChoice() {
 }
 
 
-function playRound(playerSelection, computerSelection) {
+function getResult(playerSelection, computerSelection) {
     playerSelection = playerSelection.toLowerCase();
     if (playerSelection == computerSelection) {
         return "It's a Tie!"
@@ -31,11 +31,16 @@ function playRound(playerSelection, computerSelection) {
 }
 
 
-function buttonClicked(e) {
-    console.log(playRound(e.target.textContent, getComputerChoice()))
+function playRound(e) {
+    const outputLabel = document.querySelector('.game-output');
+
+    let result = getResult(e.target.textContent,getComputerChoice())
+
+    outputLabel.textContent = result;
+
 }
 
 
 const buttons = document.querySelectorAll('.input-button');
-buttons.forEach(button => button.addEventListener('click', buttonClicked));
+buttons.forEach(button => button.addEventListener('click', playRound));
 
