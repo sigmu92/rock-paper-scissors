@@ -8,39 +8,65 @@ function getComputerChoice() {
 function getResult(playerSelection, computerSelection) {
     playerSelection = playerSelection.toLowerCase();
     if (playerSelection == computerSelection) {
-        return "It's a Tie!"
+        return 0
     } else if (playerSelection == "rock") {
         if (computerSelection == "paper") {
-            return "You Lose! Paper beats Rock";
+            return -1;
         } else {
-            return "You Win! Rock beats Scissors"
+            return 1;
         }
     } else if (playerSelection == "scissors") {
         if (computerSelection == "rock") {
-            return "You Lose! Rock beats Scissors";
+            return -1;
         } else {
-            return "You Win! Scissors beats Paper"
+            return 1;
         }
     } else {
         if (computerSelection == "scissors") {
-            return "You Lose! Scissors beats Paper";
+            return -1;
         } else {
-            return "You Win! Paper beats Rock"
+            return 1;
         }
     }
 }
 
+let wins = 0;
+let ties = 0;
+let losses = 0;
+
+function updateScreen(result = "") {
+    const resultLabel = document.querySelector('.game-output');
+    const playerScore = document.querySelector('.player-score');
+    const compScore = document.querySelector('.comp-score')
+
+    resultLabel.textContent = result;
+}
 
 function playRound(e) {
+    
     const outputLabel = document.querySelector('.game-output');
-
     let result = getResult(e.target.textContent,getComputerChoice())
+    console.log(result)
+    let resultLabel = "";
+    
+    if (result == 0){
+        ties += 1;
+        resultLabel = "It's a tie!"; 
+    } else if (result == -1) {
+        losses += 1;
+        resultLabel = "You lose!";
+    } else if (result == 1) {
+        wins += 1;
+        resultLabel = "You win!";
+    }
 
-    outputLabel.textContent = result;
+    updateScreen(resultLabel);
 
 }
 
 
 const buttons = document.querySelectorAll('.input-button');
 buttons.forEach(button => button.addEventListener('click', playRound));
+
+
 
